@@ -1,0 +1,381 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+
+%_______________________________________________________________
+%                    Packages needed:
+%_______________________________________________________________
+\usepackage{tikz, adjustbox}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\usepackage{wrapfig}
+\newcommand*{\plogo}{\fbox{$\mathcal{PL}$}} % Generic dummy publisher logo
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage{stix} % Use the STIX fonts
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage[explicit]{titlesec}
+\usepackage{soul}
+\usepackage[a4paper, margin=1in]{geometry}
+
+%................................................................
+%
+%           Defining colors for sticky notes:
+%_______________________________________________________________
+% Yellow:
+\definecolor{BgYellow}{HTML}{FFF59C}
+\definecolor{FrameYellow}{HTML}{F7A600}
+% Pink:
+\definecolor{BgPink}{HTML}{EF6FA7}
+\definecolor{FramePink}{HTML}{E5446E}
+% Green:
+\definecolor{BgGreen}{HTML}{C7D92D}
+\definecolor{FrameGreen}{HTML}{89B23B}
+% Blue:
+\definecolor{BgBlue}{HTML}{45BEE9}
+\definecolor{FrameBlue}{HTML}{31A8C9}
+% White:
+\definecolor{BgWhite}{HTML}{D8D8D8}
+\definecolor{FrameWhite}{HTML}{7F7F7F}
+% Brown:
+\definecolor{BgBrown}{HTML}{8E7A45}
+\definecolor{FrameBrown}{HTML}{6B5B32}
+%................................................................
+%
+%                   Dummy text package:
+%_______________________________________________________________
+\usepackage{lipsum}
+%................................................................
+%
+%                   NB command:
+%_______________________________________________________________
+\usepackage{contour}
+\newcommand{\NB}{\contour{black}{\textbf{{\large\sffamily\color{red}NB}}}\textbf{\large\sffamily: }}
+%................................................................
+%
+%               Defining Sticky note boxes:
+%_______________________________________________________________
+% Yellow Sticky Note (YStkyNote):
+\newtcolorbox{YStkyNote}[1][]{%
+    enhanced,
+    before skip=2mm,after skip=2mm, 
+    width=0.4\textwidth, % width of the sticky note
+    boxrule=0.2mm,
+    colback=BgYellow, colframe=FrameYellow, % Colors
+    attach boxed title to top left={xshift=0cm,yshift*=0mm-\tcboxedtitleheight},
+    varwidth boxed title*=-3cm,
+    % The titlebox:
+    boxed title style={frame code={%
+        \path[left color=FrameYellow,right color=FrameYellow,
+        middle color=FrameYellow]
+        ([xshift=-0mm]frame.north west) -- ([xshift=0mm]frame.north east)
+        [rounded corners=0mm]-- ([xshift=0mm,yshift=0mm]frame.north east)
+        -- (frame.south east) -- (frame.south west)
+        -- ([xshift=0mm,yshift=0mm]frame.north west)
+        [sharp corners]-- cycle;
+        },interior engine=empty,
+    },
+    sharp corners,rounded corners=southeast,arc is angular,arc=3mm,
+    % The "folded paper" in the bottom right corner:
+    underlay={%
+        \path[fill=BgYellow!80!black] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        \path[draw=FrameYellow,shorten <=-0.05mm,shorten >=-0.05mm,color=FrameYellow] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        },
+    drop fuzzy shadow, % Shadow
+    fonttitle=\bfseries, 
+    title={#1}
+}
+% Pink Sticky Note (PStkyNote):
+\newtcolorbox{PStkyNote}[1][]{%
+    enhanced,
+    before skip=2mm,after skip=2mm, 
+    width=0.4\textwidth, % width of the sticky note
+    boxrule=0.2mm, 
+    colback=BgPink, colframe=FramePink, % Colors
+    attach boxed title to top left={xshift=0cm,yshift*=0mm-\tcboxedtitleheight},
+    varwidth boxed title*=-3cm,
+    % The titlebox:
+    boxed title style={frame code={%
+        \path[left color=FramePink,right color=FramePink,
+        middle color=FramePink]
+        ([xshift=-0mm]frame.north west) -- ([xshift=0mm]frame.north east)
+        [rounded corners=0mm]-- ([xshift=0mm,yshift=0mm]frame.north east)
+        -- (frame.south east) -- (frame.south west)
+        -- ([xshift=0mm,yshift=0mm]frame.north west)
+        [sharp corners]-- cycle;
+        },interior engine=empty,
+    },
+    sharp corners,rounded corners=southeast,arc is angular,arc=3mm,
+    % The "folded paper" in the bottom right corner:
+    underlay={%
+        \path[fill=BgPink!80!black] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        \path[draw=FramePink,shorten <=-0.05mm,shorten >=-0.05mm,color=FramePink] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        },
+    drop fuzzy shadow, % Shadow
+    fonttitle=\bfseries, 
+    title={#1}
+}
+% Green Sticky Note (GStkyNote):
+\newtcolorbox{GStkyNote}[1][]{%
+    enhanced,
+    before skip=2mm,after skip=2mm, 
+    width=0.4\textwidth, % width of the sticky note
+    boxrule=0.2mm,
+    colback=BgGreen, colframe=FrameGreen, % Colors
+    attach boxed title to top left={xshift=0cm,yshift*=0mm-\tcboxedtitleheight},
+    varwidth boxed title*=-3cm,
+    % The titlebox:
+    boxed title style={frame code={%
+        \path[left color=FrameGreen,right color=FrameGreen,
+        middle color=FrameGreen]
+        ([xshift=-0mm]frame.north west) -- ([xshift=0mm]frame.north east)
+        [rounded corners=0mm]-- ([xshift=0mm,yshift=0mm]frame.north east)
+        -- (frame.south east) -- (frame.south west)
+        -- ([xshift=0mm,yshift=0mm]frame.north west)
+        [sharp corners]-- cycle;
+        },interior engine=empty,
+    },
+    sharp corners,rounded corners=southeast,arc is angular,arc=3mm,
+    % The "folded paper" in the bottom right corner:
+    underlay={%
+        \path[fill=BgGreen!80!black] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        \path[draw=FrameGreen,shorten <=-0.05mm,shorten >=-0.05mm,color=FrameGreen] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        },
+    drop fuzzy shadow, % Shadow
+    fonttitle=\bfseries, 
+    title={#1}
+}
+% Blue Sticky Note (BStkyNote):
+\newtcolorbox{BStkyNote}[1][]{%
+    enhanced,
+    before skip=2mm,after skip=2mm, 
+    width=0.4\textwidth, % width of the sticky note
+    boxrule=0.2mm,
+    colback=BgBlue, colframe=FrameBlue, % Colors
+    attach boxed title to top left={xshift=0cm,yshift*=0mm-\tcboxedtitleheight},
+    varwidth boxed title*=-3cm,
+    % The titlebox:
+    boxed title style={frame code={%
+        \path[left color=FrameBlue,right color=FrameBlue,
+        middle color=FrameBlue]
+        ([xshift=-0mm]frame.north west) -- ([xshift=0mm]frame.north east)
+        [rounded corners=0mm]-- ([xshift=0mm,yshift=0mm]frame.north east)
+        -- (frame.south east) -- (frame.south west)
+        -- ([xshift=0mm,yshift=0mm]frame.north west)
+        [sharp corners]-- cycle;
+        },interior engine=empty,
+    },
+    sharp corners,rounded corners=southeast,arc is angular,arc=3mm,
+    % The "folded paper" in the bottom right corner:
+    underlay={%
+        \path[fill=BgBlue!80!black] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        \path[draw=FrameBlue,shorten <=-0.05mm,shorten >=-0.05mm,color=FrameBlue] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        },
+    drop fuzzy shadow, % Shadow
+    fonttitle=\bfseries, 
+    title={#1}
+}
+% White Sticky Note (WStkyNote):
+\newtcolorbox{WStkyNote}[1][]{%
+    enhanced,
+    before skip=2mm,after skip=2mm, 
+    width=0.4\textwidth, % width of the sticky note
+    boxrule=0.2mm,
+    colback=BgWhite, colframe=FrameWhite, % Colors
+    attach boxed title to top left={xshift=0cm,yshift*=0mm-\tcboxedtitleheight},
+    varwidth boxed title*=-3cm,
+    % The titlebox:
+    boxed title style={frame code={%
+        \path[left color=FrameWhite,right color=FrameWhite,
+        middle color=FrameWhite]
+        ([xshift=-0mm]frame.north west) -- ([xshift=0mm]frame.north east)
+        [rounded corners=0mm]-- ([xshift=0mm,yshift=0mm]frame.north east)
+        -- (frame.south east) -- (frame.south west)
+        -- ([xshift=0mm,yshift=0mm]frame.north west)
+        [sharp corners]-- cycle;
+        },interior engine=empty,
+    },
+    sharp corners,rounded corners=southeast,arc is angular,arc=3mm,
+    % The "folded paper" in the bottom right corner:
+    underlay={%
+        \path[fill=BgWhite!80!black] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        \path[draw=FrameWhite,shorten <=-0.05mm,shorten >=-0.05mm,color=FrameWhite] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        },
+    drop fuzzy shadow, % Shadow
+    fonttitle=\bfseries, 
+    title={#1}
+}
+% Brown Sticky Note (BrStkyNote):
+\newtcolorbox{BrStkyNote}[1][]{%
+    enhanced,
+    before skip=2mm,after skip=2mm, 
+    width=0.4\textwidth, % width of the sticky note
+    boxrule=0.2mm,
+    colback=BgBrown, colframe=FrameBrown, % Colors
+    attach boxed title to top left={xshift=0cm,yshift*=0mm-\tcboxedtitleheight},
+    varwidth boxed title*=-3cm,
+    % The titlebox:
+    boxed title style={frame code={%
+        \path[left color=FrameBrown,right color=FrameBrown,
+        middle color=FrameBrown]
+        ([xshift=-0mm]frame.north west) -- ([xshift=0mm]frame.north east)
+        [rounded corners=0mm]-- ([xshift=0mm,yshift=0mm]frame.north east)
+        -- (frame.south east) -- (frame.south west)
+        -- ([xshift=0mm,yshift=0mm]frame.north west)
+        [sharp corners]-- cycle;
+        },interior engine=empty,
+    },
+    sharp corners,rounded corners=southeast,arc is angular,arc=3mm,
+    % The "folded paper" in the bottom right corner:
+    underlay={%
+        \path[fill=BgBrown!80!black] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        \path[draw=FrameBrown,shorten <=-0.05mm,shorten >=-0.05mm,color=FrameBrown] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        },
+    drop fuzzy shadow, % Shadow
+    fonttitle=\bfseries, 
+    title={#1}
+}
+
+% 
+\definecolor{titleblue}{HTML}{2A202C}
+
+\newbox\TitleUnderlineTestBox
+\newcommand*\TitleUnderline[1]
+  {%
+    \bgroup
+    \setbox\TitleUnderlineTestBox\hbox{\colorbox{titleblue}\strut}%
+    \setul{\dimexpr\dp\TitleUnderlineTestBox-.3ex\relax}{.3ex}%
+    \ul{#1}%
+    \egroup
+  }
+\newcommand*\SectionNumberBox[1]
+  {%
+    \colorbox{titleblue}
+      {%
+        \makebox[2.5em][c]
+          {%
+            \color{white}%
+            \strut
+            \csname the#1\endcsname
+          }%
+      }%
+    \TitleUnderline{\ \ \ }%
+  }
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{titleblue}}
+  {\SectionNumberBox{section}}
+  {0pt}
+  {\TitleUnderline{#1}}
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{titleblue}}
+  {\SectionNumberBox{subsection}}
+  {0pt}
+  {\TitleUnderline{#1}}
+
+
+
+
+\begin{document}
+    \begin{titlepage}
+        \raggedleft
+        \rule{1pt}{\textheight}
+        \hspace{0.05\textwidth}
+        \parbox[b]{0.75\textwidth}{
+            {\Huge\bfseries \textcolor[HTML]{2A202C}{Meta Database Engineer}\\[0.5\baselineskip] \textcolor[HTML]{2A202C}{Professional Certificate}}\\[2\baselineskip]
+            {\large\textit{\textcolor[HTML]{2A202C}{Course Notes}}}\\[4\baselineskip]
+            {\Large\textsc{\textcolor[HTML]{2A202C}{Jesus Cardenaz}}}
+            
+            \vspace{0.5\textheight}
+        }
+    \end{titlepage}
+
+    \section{Introduction to Databases}
+
+    \paragraph{Database} A database is a form of electronic storage in which data is organized systematically.   
+
+    \paragraph*{Relational Databases} Relational dataabases are based on the relational model, which organizes data into tables with rows and columns. The establish relationships using keys and enforce integrity constraints. Relational databases adhere to a predefined schema and use SQL as the primary language for data manipulation and querying. 
+
+    \paragraph{Non-Relational Databases} Non-relational databases, also known as NoSQL databases, encompass various \\ database technologies that deviate from the relational model. These databases typically prioritize scalability, performance and flexibility over strict adherence to a predefined schema.
+
+
+    \paragraph*{SQL vs NoSQL databases} The main difference between SQl and NoSQL databases lies in their data model, query language, schema flexibility, and scalability characteristics. While SQL databases usually adhere to ACID (Atomicity, Consistency, Isolation, Durability) compliance. NoSQL uses the BASE (Basically Available, Soft State, Enventual Consistency) properties.
+
+    \paragraph*{Most common types of databases:}
+    \begin{itemize}
+        \item Relational Databases: Is the most common type of database, they store data in tables with rows and columns. 
+        \item Object oriented databases: Instead of breaking down data into tables, these databases store data in objects and classes.
+        \item Graph databases: Graph databases are designed to store and manage databased on graph theory concepts. Data is represented as nodes, which are entities, and edges which represent relationships between the nodes.
+        \item Document databases: Store and manage and organize data into self-contained documents, typically in formats like JSON or XML. Each document can have a different structure and schema, allowing for flexibility in data modeling. 
+    \end{itemize}
+    
+    \paragraph*{Database Schema} A database schema is the structure of the database. The simplest way of undertanding database schema is to think of it as the blueprint of a database. Database schema can be divided into three categories: 
+
+    \begin{itemize}
+        \item Conceptual or logical schema: Defines entities, attributes and relationships. It is often represented using Entity Relational Diagrams
+        \item Internal or Physical schema: Defines how the data is actually stored and organized within the physical storage devices.
+        \item External or View Schema: Represents different user views or subsets of the data from the overall database. 
+    \end{itemize}
+
+    \paragraph*{Database Normalization} Is the process in database design that helps ensure data integrity, eliminate redundancy, and improve data consistency by organizing data into well-structured tables. There are three fundamentan normalization forms known as: 
+
+    \begin{itemize}
+        \item First Normal form (1NF): It requires that the data is organized into tables, and each column of a table contains atomic values (indivisible values). Additionally, it eliminates redundant data by ensuring that each attribute within a table contains only one value. 
+        \item Second Normal form (2NF): It states that no non-key attributes should be dependent on only a portion of the primary key. In other words, any attribute that depends on only a subset of the primary key should be moved to a separate table. 
+        \item Third Normal form (3NF): States that non non-key attribute should depend on another non-key attribute within the same table. 
+    \end{itemize}
+
+
+
+
+    
+
+
+\end{document}
+
+    % Stick Notes examples 
+    % % Put the sticky note in a wrapfigure to have text wrap around it.
+    % \begin{wrapfigure}{L}{0.45\textwidth}
+    %     \begin{YStkyNote}[Note 1]
+    %         This text is \emph{important}. Here is an useful equation:
+    %         \begin{align}
+    %             \sin (x) \approx x
+    %         \end{align}
+    %     \end{YStkyNote}
+    % \end{wrapfigure}
+
+    % \begin{wrapfigure}{R}{0.45\textwidth}
+    %     \begin{PStkyNote}[Note 2]
+    %     Here is some more text. This is useful information you need to know:
+    %     \begin{itemize}
+    %         \item sin approximation valid \textbf{only} for small angles
+    %         \item 2 radians is \textit{not} a small angle
+    %     \end{itemize}
+    %     \end{PStkyNote}
+    % \end{wrapfigure}
+
+    % \begin{wrapfigure}{L}{0.45\textwidth}
+    %     \begin{GStkyNote}[Note 3]
+    %     \NB do not forget this!
+    %     \end{GStkyNote}
+    % \end{wrapfigure}
+
+    % \begin{wrapfigure}{R}{0.45\textwidth}
+    %     \begin{BStkyNote}[Note 4]
+    %     This will be on the final exam!
+    %     You better \emph{study} hard!
+    %     \end{BStkyNote}
+    % \end{wrapfigure}
+
+    % \begin{wrapfigure}{L}{0.45\textwidth}
+    %     \begin{WStkyNote}[Note 5]
+    %         \begin{equation}
+    %             pV=Nk_BT
+    %         \end{equation}
+    %     \end{WStkyNote}
+    % \end{wrapfigure}
+
+    % \begin{wrapfigure}{R}{0.45\textwidth}
+    %     \begin{BrStkyNote}[Note 6]
+    %     Type \verb+\NB+ to get the \NB text.
+    %     \end{BrStkyNote}
+    % \end{wrapfigure}
