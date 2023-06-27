@@ -1,0 +1,589 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+
+%_______________________________________________________________
+%                    Packages needed:
+%_______________________________________________________________
+\usepackage{tikz, adjustbox}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\usepackage{wrapfig}
+\newcommand*{\plogo}{\fbox{$\mathcal{PL}$}} % Generic dummy publisher logo
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage{stix} % Use the STIX fonts
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage[explicit]{titlesec}
+\usepackage{soul}
+\usepackage[a4paper, margin=1in]{geometry}
+
+%................................................................
+%
+%           Defining colors for sticky notes:
+%_______________________________________________________________
+% Yellow:
+\definecolor{BgYellow}{HTML}{FFF59C}
+\definecolor{FrameYellow}{HTML}{F7A600}
+% Pink:
+\definecolor{BgPink}{HTML}{EF6FA7}
+\definecolor{FramePink}{HTML}{E5446E}
+% Green:
+\definecolor{BgGreen}{HTML}{C7D92D}
+\definecolor{FrameGreen}{HTML}{89B23B}
+% Blue:
+\definecolor{BgBlue}{HTML}{45BEE9}
+\definecolor{FrameBlue}{HTML}{31A8C9}
+% White:
+\definecolor{BgWhite}{HTML}{D8D8D8}
+\definecolor{FrameWhite}{HTML}{7F7F7F}
+% Brown:
+\definecolor{BgBrown}{HTML}{8E7A45}
+\definecolor{FrameBrown}{HTML}{6B5B32}
+%................................................................
+%
+%                   Dummy text package:
+%_______________________________________________________________
+\usepackage{lipsum}
+%................................................................
+%
+%                   NB command:
+%_______________________________________________________________
+\usepackage{contour}
+\newcommand{\NB}{\contour{black}{\textbf{{\large\sffamily\color{red}NB}}}\textbf{\large\sffamily: }}
+%................................................................
+%
+%               Defining Sticky note boxes:
+%_______________________________________________________________
+% Yellow Sticky Note (YStkyNote):
+\newtcolorbox{YStkyNote}[1][]{%
+    enhanced,
+    before skip=2mm,after skip=2mm, 
+    width=0.4\textwidth, % width of the sticky note
+    boxrule=0.2mm,
+    colback=BgYellow, colframe=FrameYellow, % Colors
+    attach boxed title to top left={xshift=0cm,yshift*=0mm-\tcboxedtitleheight},
+    varwidth boxed title*=-3cm,
+    % The titlebox:
+    boxed title style={frame code={%
+        \path[left color=FrameYellow,right color=FrameYellow,
+        middle color=FrameYellow]
+        ([xshift=-0mm]frame.north west) -- ([xshift=0mm]frame.north east)
+        [rounded corners=0mm]-- ([xshift=0mm,yshift=0mm]frame.north east)
+        -- (frame.south east) -- (frame.south west)
+        -- ([xshift=0mm,yshift=0mm]frame.north west)
+        [sharp corners]-- cycle;
+        },interior engine=empty,
+    },
+    sharp corners,rounded corners=southeast,arc is angular,arc=3mm,
+    % The "folded paper" in the bottom right corner:
+    underlay={%
+        \path[fill=BgYellow!80!black] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        \path[draw=FrameYellow,shorten <=-0.05mm,shorten >=-0.05mm,color=FrameYellow] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        },
+    drop fuzzy shadow, % Shadow
+    fonttitle=\bfseries, 
+    title={#1}
+}
+% Pink Sticky Note (PStkyNote):
+\newtcolorbox{PStkyNote}[1][]{%
+    enhanced,
+    before skip=2mm,after skip=2mm, 
+    width=0.4\textwidth, % width of the sticky note
+    boxrule=0.2mm, 
+    colback=BgPink, colframe=FramePink, % Colors
+    attach boxed title to top left={xshift=0cm,yshift*=0mm-\tcboxedtitleheight},
+    varwidth boxed title*=-3cm,
+    % The titlebox:
+    boxed title style={frame code={%
+        \path[left color=FramePink,right color=FramePink,
+        middle color=FramePink]
+        ([xshift=-0mm]frame.north west) -- ([xshift=0mm]frame.north east)
+        [rounded corners=0mm]-- ([xshift=0mm,yshift=0mm]frame.north east)
+        -- (frame.south east) -- (frame.south west)
+        -- ([xshift=0mm,yshift=0mm]frame.north west)
+        [sharp corners]-- cycle;
+        },interior engine=empty,
+    },
+    sharp corners,rounded corners=southeast,arc is angular,arc=3mm,
+    % The "folded paper" in the bottom right corner:
+    underlay={%
+        \path[fill=BgPink!80!black] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        \path[draw=FramePink,shorten <=-0.05mm,shorten >=-0.05mm,color=FramePink] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        },
+    drop fuzzy shadow, % Shadow
+    fonttitle=\bfseries, 
+    title={#1}
+}
+% Green Sticky Note (GStkyNote):
+\newtcolorbox{GStkyNote}[1][]{%
+    enhanced,
+    before skip=2mm,after skip=2mm, 
+    width=0.4\textwidth, % width of the sticky note
+    boxrule=0.2mm,
+    colback=BgGreen, colframe=FrameGreen, % Colors
+    attach boxed title to top left={xshift=0cm,yshift*=0mm-\tcboxedtitleheight},
+    varwidth boxed title*=-3cm,
+    % The titlebox:
+    boxed title style={frame code={%
+        \path[left color=FrameGreen,right color=FrameGreen,
+        middle color=FrameGreen]
+        ([xshift=-0mm]frame.north west) -- ([xshift=0mm]frame.north east)
+        [rounded corners=0mm]-- ([xshift=0mm,yshift=0mm]frame.north east)
+        -- (frame.south east) -- (frame.south west)
+        -- ([xshift=0mm,yshift=0mm]frame.north west)
+        [sharp corners]-- cycle;
+        },interior engine=empty,
+    },
+    sharp corners,rounded corners=southeast,arc is angular,arc=3mm,
+    % The "folded paper" in the bottom right corner:
+    underlay={%
+        \path[fill=BgGreen!80!black] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        \path[draw=FrameGreen,shorten <=-0.05mm,shorten >=-0.05mm,color=FrameGreen] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        },
+    drop fuzzy shadow, % Shadow
+    fonttitle=\bfseries, 
+    title={#1}
+}
+% Blue Sticky Note (BStkyNote):
+\newtcolorbox{BStkyNote}[1][]{%
+    enhanced,
+    before skip=2mm,after skip=2mm, 
+    width=0.4\textwidth, % width of the sticky note
+    boxrule=0.2mm,
+    colback=BgBlue, colframe=FrameBlue, % Colors
+    attach boxed title to top left={xshift=0cm,yshift*=0mm-\tcboxedtitleheight},
+    varwidth boxed title*=-3cm,
+    % The titlebox:
+    boxed title style={frame code={%
+        \path[left color=FrameBlue,right color=FrameBlue,
+        middle color=FrameBlue]
+        ([xshift=-0mm]frame.north west) -- ([xshift=0mm]frame.north east)
+        [rounded corners=0mm]-- ([xshift=0mm,yshift=0mm]frame.north east)
+        -- (frame.south east) -- (frame.south west)
+        -- ([xshift=0mm,yshift=0mm]frame.north west)
+        [sharp corners]-- cycle;
+        },interior engine=empty,
+    },
+    sharp corners,rounded corners=southeast,arc is angular,arc=3mm,
+    % The "folded paper" in the bottom right corner:
+    underlay={%
+        \path[fill=BgBlue!80!black] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        \path[draw=FrameBlue,shorten <=-0.05mm,shorten >=-0.05mm,color=FrameBlue] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        },
+    drop fuzzy shadow, % Shadow
+    fonttitle=\bfseries, 
+    title={#1}
+}
+% White Sticky Note (WStkyNote):
+\newtcolorbox{WStkyNote}[1][]{%
+    enhanced,
+    before skip=2mm,after skip=2mm, 
+    width=0.4\textwidth, % width of the sticky note
+    boxrule=0.2mm,
+    colback=BgWhite, colframe=FrameWhite, % Colors
+    attach boxed title to top left={xshift=0cm,yshift*=0mm-\tcboxedtitleheight},
+    varwidth boxed title*=-3cm,
+    % The titlebox:
+    boxed title style={frame code={%
+        \path[left color=FrameWhite,right color=FrameWhite,
+        middle color=FrameWhite]
+        ([xshift=-0mm]frame.north west) -- ([xshift=0mm]frame.north east)
+        [rounded corners=0mm]-- ([xshift=0mm,yshift=0mm]frame.north east)
+        -- (frame.south east) -- (frame.south west)
+        -- ([xshift=0mm,yshift=0mm]frame.north west)
+        [sharp corners]-- cycle;
+        },interior engine=empty,
+    },
+    sharp corners,rounded corners=southeast,arc is angular,arc=3mm,
+    % The "folded paper" in the bottom right corner:
+    underlay={%
+        \path[fill=BgWhite!80!black] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        \path[draw=FrameWhite,shorten <=-0.05mm,shorten >=-0.05mm,color=FrameWhite] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        },
+    drop fuzzy shadow, % Shadow
+    fonttitle=\bfseries, 
+    title={#1}
+}
+% Brown Sticky Note (BrStkyNote):
+\newtcolorbox{BrStkyNote}[1][]{%
+    enhanced,
+    before skip=2mm,after skip=2mm, 
+    width=0.4\textwidth, % width of the sticky note
+    boxrule=0.2mm,
+    colback=BgBrown, colframe=FrameBrown, % Colors
+    attach boxed title to top left={xshift=0cm,yshift*=0mm-\tcboxedtitleheight},
+    varwidth boxed title*=-3cm,
+    % The titlebox:
+    boxed title style={frame code={%
+        \path[left color=FrameBrown,right color=FrameBrown,
+        middle color=FrameBrown]
+        ([xshift=-0mm]frame.north west) -- ([xshift=0mm]frame.north east)
+        [rounded corners=0mm]-- ([xshift=0mm,yshift=0mm]frame.north east)
+        -- (frame.south east) -- (frame.south west)
+        -- ([xshift=0mm,yshift=0mm]frame.north west)
+        [sharp corners]-- cycle;
+        },interior engine=empty,
+    },
+    sharp corners,rounded corners=southeast,arc is angular,arc=3mm,
+    % The "folded paper" in the bottom right corner:
+    underlay={%
+        \path[fill=BgBrown!80!black] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        \path[draw=FrameBrown,shorten <=-0.05mm,shorten >=-0.05mm,color=FrameBrown] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+        },
+    drop fuzzy shadow, % Shadow
+    fonttitle=\bfseries, 
+    title={#1}
+}
+
+% 
+\definecolor{titleblue}{HTML}{2A202C}
+
+\newbox\TitleUnderlineTestBox
+\newcommand*\TitleUnderline[1]
+  {%
+    \bgroup
+    \setbox\TitleUnderlineTestBox\hbox{\colorbox{titleblue}\strut}%
+    \setul{\dimexpr\dp\TitleUnderlineTestBox-.3ex\relax}{.3ex}%
+    \ul{#1}%
+    \egroup
+  }
+\newcommand*\SectionNumberBox[1]
+  {%
+    \colorbox{titleblue}
+      {%
+        \makebox[2.5em][c]
+          {%
+            \color{white}%
+            \strut
+            \csname the#1\endcsname
+          }%
+      }%
+    \TitleUnderline{\ \ \ }%
+  }
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{titleblue}}
+  {\SectionNumberBox{section}}
+  {0pt}
+  {\TitleUnderline{#1}}
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{titleblue}}
+  {\SectionNumberBox{subsection}}
+  {0pt}
+  {\TitleUnderline{#1}}
+
+
+
+
+\begin{document}
+    \begin{titlepage}
+        \raggedleft
+        \rule{1pt}{\textheight}
+        \hspace{0.05\textwidth}
+        \parbox[b]{0.75\textwidth}{
+            {\Huge\bfseries \textcolor[HTML]{2A202C}{Google Data Analytics}\\[0.5\baselineskip] \textcolor[HTML]{2A202C}{Professional Certificate}}\\[2\baselineskip]
+            {\large\textit{\textcolor[HTML]{2A202C}{Course Notes}}}\\[4\baselineskip]
+            {\Large\textsc{\textcolor[HTML]{2A202C}{Jesus Cardenaz}}}
+            
+            \vspace{0.5\textheight}
+        }
+    \end{titlepage}
+
+    \section{Concepts}
+
+    Thhe course will focus on effective questioning, problem-solving, types of data, 
+    structured thinking, and communication strategies. 
+
+    \begin{itemize}
+        \item Effective and Ineffective Questions: 
+            \begin{itemize}
+                \item Effective questions lead to insights and help solve business problems
+                \item Ineffective questions hinder the data analysis process.
+            \end{itemize}
+        \item Data Analysis Phases 
+            \begin{enumerate}
+                \item Ask: Defining the problem, understanding stakeholder expectations.
+                \item Prepare: Gathering and organizing data for analysis. 
+                \item Process: Cleaning, transforming, and formatting data. 
+                \item Analyse: Applying statistical and analytical techniques. 
+                \item Share: Presenting findings and insighits to stakeholders.
+                \item Act: Taking action based on the analysis.
+            \end{enumerate}
+        \item Structured Thinking
+            \begin{itemize}
+                \item Structured thinking involves recognizing the current problem, organizing information, identifying gaps and opportunities, and determining options.
+                \item It breaks down complex problems into smaller steps to find logical solutions.
+            \end{itemize}
+        \item Data Collection Methods
+            \begin{itemize}
+                \item First-party data: Data collected by an individual or group using their own resources.
+                \item Second-party data: Data collected by a group directly from its audience and then sold.
+                \item Third-party data: Data collected from outside sources that were not collected directly.
+            \end{itemize}
+
+        \item Data Collection Considerations
+            \begin{itemize}
+                \item How the data will be collected
+                \item Choose data sources
+                \item Decide what data to use
+                \item Select the right data type
+                \item Determine the time frame 
+            \end{itemize}
+
+        \item Types of Data
+            \begin{itemize}
+                \item Qualitative Data: Descriptive data that cannot be easily expressed using number, such as movie titles and cast members.
+                \item Quantitative Data: Measurable or countable data expressed as numbers, such as budget and box office revenue.
+                \item Discrete Data: Counted data with a limited number of values.
+                \item Continuous Data: Measured data that can be expressed as decimals with multiple decimal places.
+                \item Nominal Data: Qualitative data categorized without a set order, such as responses to a yes/no question.
+                \item Ordinal Data: Qualitative data with a set order or scale, such as ranking a movie from 1 to 5.
+                \item Internal Data: Data that resides within a company's own systems and is collected using their own methods.
+                \item External Data: Data generated outside of an organization, often collected from various sources.
+                \item Structured Data: Organized in a specific format, such as spreadsheets or databases, making it easily searchable and analysis-ready.
+                \item Unstructured Data: Data that lacks a clear organization, such as audio and video files, and does not fit into rows and columns.
+            \end{itemize}
+        \item Data Modeling 
+            \begin{itemize}
+                \item Data Models are visual representations that organizes data elements and their relationships, ensuring consistency and providing a framework for understanding the data.
+            \end{itemize}
+
+        \item Types of data modeling 
+            \begin{itemize}
+                \item Conceptual: Gives a high-level view of the data structure, such as how data interacts across an organization. It does no tcontain technical details.
+                \item Logical: Focuses on the technical details of a database such as relationships, attributes and entities. 
+                \item Physical: Depicts how a database operates. A physical data model defines all entities and attributes used.
+            \end{itemize}
+
+        \item Bias
+            \begin{itemize}
+                \item Sampling Bias: When a sample ins't representative of the population as a whole.
+                \item Unbiased Sampling: When a sample is representative of the population being measured.
+                \item Observer Bias: The tendency fot different people to observe thing differently
+                \item Interpretation Bias: The tendendcy to always interpret ambiguous situations in a positive or negative way.
+                \item Confirmation Bias: Is the tendency to search for or interpret information in a way that confirms pre-existing beiefs.
+            \end{itemize}
+
+        \item Identifying good data sources, a good data source needs to be:
+            \begin{itemize}
+                \item Reliable
+                \item Original
+                \item Comprehensive
+                \item Current 
+                \item Cited
+            \end{itemize}
+
+
+        \item Data Ethics 
+            \begin{itemize}
+                \item Data Ethics: Well-founded standards of right and wrong that dictate how data is collected, shared, and used.
+                \item Ownership: The idea that individuals own the raw data they provide and have control over its usage, processing, adn sharing.
+                \item Transaction transparency: All data processing activities and algorithms should be explainable and understood by the individuals who provice their data to ensure fairness and address concerns of data bias.
+                \item Consent: The right of individuals to know explicit details about how and why their data will be used before agreeing to provide it.
+                \item Currency: Awareness of financial transactions resulting from the use of presonal data and the ability to opt out.
+                \item Privacy: Protecting and securing personal information and data. 
+                \item Openness: Maing the data process transparent and accesisble to individuals.
+            \end{itemize}
+
+        \item Data Subject 
+            \begin{itemize}
+                \item An individual whose personal data is being collected, processed, or stored.
+            \end{itemize}
+
+        \item  Data often anonymized
+            \begin{itemize}
+                \item Thelephone numbers
+                \item Names
+                \item License plates
+                \item Social Security numbers
+                \item IP addresses
+                \item Medical records
+                \item email addresses
+                \item photographs
+                \item Account numbers
+            \end{itemize}
+
+
+        \item Databases
+            \begin{itemize}
+                \item Database Normalization: Is the process of organizing data in a relational database, reating tables, and establishing relationships between those tables.
+                \item 
+            \end{itemize}
+
+        \item  Metadata
+            \begin{itemize}
+                \item Descriptive metadata: Describes a piece of data and can be used to identify it at a later point in time. (ID, Names)
+                \item Structural metadata: Indicates how a piece of data is organized and whether it is part of one, or more than one, data collection (Categories, Chapters, Relationships)
+                \item Administrative metadata: Indicates the technical source of a digital asset. (File Type, Date, etc)
+            \end{itemize}
+
+        \item Metadata Repositories - A database specifically created to store metadata
+            \begin{itemize}
+                \item Describes the state and location of themetadata
+                \item Describes the structures of the tables inside
+                \item Describes how the data flows through the repository
+                \item Keep track of who accesses the metadata and when
+            \end{itemize}
+
+        \item Data ingegrity
+            \begin{itemize}
+                \item The accuracy, completeness, consistency, and trustworthiness of data throughout its lifecylce.
+            \end{itemize}
+
+        \item Verification 
+            \begin{itemize}
+                \item A process to confirm that a data-cleaning effort was well-executed and the resulting data is accurate and reliable.
+            \end{itemize}
+            
+        \item Big Picture when verifying data-cleaning 
+            \begin{enumerate}
+                \item Consider the business problem.
+                \item Consider the goal of the proyect.
+                \item Consider the data.
+            \end{enumerate}
+
+        \item The 4 Phases of Analysis
+            \begin{itemize}
+                \item Organize data: Involves arrangin dat in a structured manner to facilitate further exploration and understanding.
+                \item Format and adjust: Data is modified and prepared for analysis by applying filters, sorting, or other adjustments to make it more easily digestible and accessible. 
+                \item Get Input from others: Seeking feedback, opinions, and perspectives from other individuals to gain insights and considerations that may help in the analysis process.
+                \item Transform Data: Relationships and patterns within the data are identified, and calculations are made based on the available data to derive meaningful insights and make informed decisions. 
+            \end{itemize}
+            
+        \item Elements of a successful visualization:
+            \begin{itemize}
+                \item Information/Data: The underlying data or information being visualized.
+                \item Story: The narrative or concept that adds meaning and interest to the data.
+                \item Goal: The purpose or function of the visualization, making the data useful and usable.
+                \item Visual form: The visual design and structure of the visualization.
+            \end{itemize}
+        
+        \item Elements for effective visuals 
+            \begin{itemize}
+                \item Clear meaning: Clearly comunicating the intended insight or message to the audience.
+                \item Sophisticated use of contrast: Utilizing visual context and contrast to highlight the most important data in a visualization
+                \item Refined execution: Attention to detail and effective use of visual elements, such lines, shapes, colors, value, spce and movement, in a visualizations
+            \end{itemize}
+
+
+
+        \item Data Storytelling steps 
+            \\\\ Data Storytelling is communicating the meaning of a dataset with vsuals and narrative that is
+            customized for a particular audience.
+            
+            \begin{itemize}
+                \item Engage your audience
+                \item Create compelling visuals
+                \item Tell the story in an interesting narrative.
+            \end{itemize}
+
+        \item The McCandless Method
+            \begin{enumerate}
+                \item Introduce the graphic by Names
+                \item Answer obvious questions before they're asked
+                \item State the insight of your graphic
+                \item Call out data to support that insight
+                \item Tell your audience why it matters
+            \end{enumerate}
+
+        \item What not to do in a presentation 
+            \begin{itemize}
+                \item No story, no logical flows
+                \item No titles 
+                \item Too much text 
+                \item Hard to understand
+                \item Uneven and inconsistent format, no theme 
+                \item No conclusion or recommendation
+            \end{itemize}
+
+        \item Responding to possible objections
+            \begin{itemize}
+            \item Communicate any assumptions
+            \item Explain why your analysis might be different than expected 
+            \item Acknowledge that those objections are valid and take steps to investigate further
+        \end{itemize}
+
+        \item Types of Objections
+            \begin{itemize}
+                \item About the data 
+                    \begin{itemize}
+                        \item Whre you got the data? 
+                        \item What systems it came from? 
+                        \item What transformations happened to it?
+                    \end{itemize}
+                
+                    \item About your analysis 
+                    \begin{itemize}
+                        \item Is your analysis reproducible?
+                        \item Who did you get feedback from?
+                    \end{itemize}
+
+                \item About your findings
+                    \begin{itemize}
+                        \item Do these findings exist in previous time periods?
+                        \item Did you control for the differences in your data?
+                    \end{itemize}
+
+            \end{itemize}
+
+
+
+
+    \end{itemize}
+
+
+
+
+
+    
+
+
+\end{document}
+
+    % Stick Notes examples 
+    % % Put the sticky note in a wrapfigure to have text wrap around it.
+    % \begin{wrapfigure}{L}{0.45\textwidth}
+    %     \begin{YStkyNote}[Note 1]
+    %         This text is \emph{important}. Here is an useful equation:
+    %         \begin{align}
+    %             \sin (x) \approx x
+    %         \end{align}
+    %     \end{YStkyNote}
+    % \end{wrapfigure}
+
+    % \begin{wrapfigure}{R}{0.45\textwidth}
+    %     \begin{PStkyNote}[Note 2]
+    %     Here is some more text. This is useful information you need to know:
+    %     \begin{itemize}
+    %         \item sin approximation valid \textbf{only} for small angles
+    %         \item 2 radians is \textit{not} a small angle
+    %     \end{itemize}
+    %     \end{PStkyNote}
+    % \end{wrapfigure}
+
+    % \begin{wrapfigure}{L}{0.45\textwidth}
+    %     \begin{GStkyNote}[Note 3]
+    %     \NB do not forget this!
+    %     \end{GStkyNote}
+    % \end{wrapfigure}
+
+    % \begin{wrapfigure}{R}{0.45\textwidth}
+    %     \begin{BStkyNote}[Note 4]
+    %     This will be on the final exam!
+    %     You better \emph{study} hard!
+    %     \end{BStkyNote}
+    % \end{wrapfigure}
+
+    % \begin{wrapfigure}{L}{0.45\textwidth}
+    %     \begin{WStkyNote}[Note 5]
+    %         \begin{equation}
+    %             pV=Nk_BT
+    %         \end{equation}
+    %     \end{WStkyNote}
+    % \end{wrapfigure}
+
+    % \begin{wrapfigure}{R}{0.45\textwidth}
+    %     \begin{BrStkyNote}[Note 6]
+    %     Type \verb+\NB+ to get the \NB text.
+    %     \end{BrStkyNote}
+    % \end{wrapfigure}
